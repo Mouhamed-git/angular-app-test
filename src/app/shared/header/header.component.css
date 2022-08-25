@@ -1,0 +1,47 @@
+
+mat-toolbar {
+    background: #ffc107;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    height: 88px;
+}
+
+img {
+    width: 10%;
+}
+.pointer {
+    cursor: pointer;
+    letter-spacing: 8px;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+
+.card-profile{
+    margin-right: 20px;
+    width: 56px;
+    height: 56px;
+    border-radius: 100px;
+}
+
+.flex-header {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 20px;
+}
+
+.profile-name {
+    position: absolute;
+    top: 13px;
+    right: 37%;
+    font-family: 'Proxima Nova';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+    color: #061020;
+}

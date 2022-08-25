@@ -1,0 +1,38 @@
+<div>
+  <mat-toolbar>
+    <img src="../../../assets/images/logo-edacy.svg" alt="logo edacy" class="">
+    <div class="flex-header">
+      <div class="mx-5"> 
+        <a>
+          <i class='bx bx-aperture'></i>
+          <mat-select [(ngModel)]="defalutLanguage">
+            <mat-option *ngFor="let i of ['EN', 'FR']" [value]="i">
+              {{i}}
+            </mat-option>
+          </mat-select>
+        </a>
+      </div>
+      <div class="d-flex align-items-center">
+        <mat-card class="card-profile">
+          <mat-card-header>
+            <span class="profile-name">A</span>
+          </mat-card-header>
+        </mat-card>
+        <i class='bx bx-chevron-down' [matMenuTriggerFor]="menu"></i>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            Profil
+          </button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item>
+            Déconnexion
+          </button>
+        </mat-menu>
+       
+      </div>
+    </div>
+   
+  </mat-toolbar> 
+
+  
+</div>

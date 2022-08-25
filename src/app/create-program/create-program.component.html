@@ -1,0 +1,227 @@
+<section class="home-section">
+
+    <div class="container w-50">
+        <div class="row mx-4">
+            <h4 class="title mt-4">Create Program</h4>
+            <div mat-dialog-content class="">
+                <form #form="ngForm">
+                    <h4 class="subtitle">Overview</h4>
+                        <mat-label>Program Title</mat-label><br>
+                        <mat-form-field>
+                            <input
+                                type="text"
+                                matInput
+                                name="title"
+                                #title="ngModel"
+                                [(ngModel)]="program.title"
+                                placeholder="Ex. Front-end development 101"
+                                required
+                            />
+                            <mat-error *ngIf="!isValid(title)">{{ getError(title) }}</mat-error>
+                        </mat-form-field>
+
+                        <mat-label>Program Language</mat-label><br>
+                        <mat-form-field>
+                            <mat-select
+                                type="text"
+                                name="language"
+                                #language="ngModel"
+                                [(ngModel)]="program.language"
+                                (selectionChange)="getLanguageSelected($event)"     
+                                required
+                            >
+                                <mat-option *ngFor="let lang of languagages" [value]="lang">{{ lang }}</mat-option>
+                            </mat-select>
+                             <mat-error *ngIf="!isValid(language)">{{ getError(language) }}</mat-error>         
+                        </mat-form-field>
+
+                    <p>
+                        <mat-label class="">Program Level</mat-label><br>
+                        <mat-radio-group class=""
+                            aria-label="Select an option"
+                            type="text"
+                            name="level"
+                            #level="ngModel"
+                            [(ngModel)]="levelSelected"
+                            checked
+                            required>
+                            <mat-radio-button [class]="isFirst ? '' : 'mx-4' " *ngFor="let level of levels; let isFirst=first" [value]="level">{{ level }}</mat-radio-button>
+                            <mat-error *ngIf="!isValid(level)">{{ getError(level) }}</mat-error>  
+                        </mat-radio-group>
+                    </p>
+
+                    <p class="py-2">
+                        <mat-label>Program Type</mat-label><br>
+                        <mat-radio-group 
+                            aria-label="Select an option"
+                            type="text"
+                            name="programType"
+                            #programType="ngModel"
+                            [(ngModel)]="programTypeSelected"
+                            required>
+                            <mat-radio-button [class]="isFirst ? '' : 'mx-4' " *ngFor="let type of programTypes; let isFirst=first" [value]="type"> {{ type }}</mat-radio-button>
+                            <mat-error *ngIf="!isValid(programType)">{{ getError(programType) }}</mat-error>  
+                        </mat-radio-group>
+                    </p>
+                    <h4 class="subtitle">Details</h4>
+                        <mat-label>Description</mat-label><br>
+                        <mat-form-field>
+                            <textarea
+                                type="text"
+                                matInput
+                                name="description"
+                                #description="ngModel"
+                                [(ngModel)]="program.description"
+                                required
+                            ></textarea>
+                            <mat-error *ngIf="!isValid(description)">{{ getError(description) }}</mat-error>
+                        </mat-form-field>
+                        <mat-label>Learning Objectives</mat-label><br>
+                        <mat-form-field>
+                            <textarea
+                                type="text"
+                                matInput
+                                name="objectif"
+                                #objectif="ngModel"
+                                [(ngModel)]="program.objectif"
+                                required
+                            ></textarea>
+                            <mat-error *ngIf="!isValid(objectif)">{{ getError(objectif) }}</mat-error>
+                        </mat-form-field>
+                    
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <mat-label>Duration (weeks)</mat-label><br>
+                            <mat-form-field>
+                                <input
+                                    type="number"
+                                    min="1"
+                                    matInput
+                                    name="duration"
+                                    #duration="ngModel"
+                                    [(ngModel)]="defaultDuration"
+                                    required
+                                />
+                                <mat-error *ngIf="!isValid(duration)">{{ getError(duration) }}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-lg-6">
+                            <mat-label>Hours per week</mat-label><br>
+                            <mat-form-field>
+                                <input
+                                    type="number"
+                                    min="1"
+                                    matInput
+                                    name="hours"
+                                    #hours="ngModel"
+                                    [(ngModel)]="defaultHours"
+                                    required
+                                />
+                                <mat-error *ngIf="!isValid(hours)">{{ getError(hours) }}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                        <mat-label>Prerequisite</mat-label><br>
+                        <mat-form-field>
+                            <input
+                            type="text"
+                            matInput
+                            name="prerequisite"
+                            #prerequisite="ngModel"
+                            [(ngModel)]="program.prerequisite"
+                            placeholder="Ex. Knowledge of AngularJS"
+                            required
+                            />
+                            <mat-error *ngIf="!isValid(prerequisite)">{{ getError(prerequisite) }}</mat-error>
+                        </mat-form-field>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <mat-label>Type of Certification</mat-label><br>
+                            <mat-form-field>
+                                <input
+                                type="text"
+                                matInput
+                                name="certification"
+                                #certificationType="ngModel"
+                                [(ngModel)]="program.certificationType"
+                                placeholder="Ex. Knowledge of AngularJS"
+                                required
+                                />
+                                <mat-error *ngIf="!isValid(certificationType)">{{ getError(certificationType) }}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-lg-6">
+                        <mat-label>Start Date</mat-label><br>
+                        <mat-form-field color="accent">
+                            <input
+                                type="text"
+                                matInput
+                                name="startDate"
+                                [matDatepicker]="date"
+                                #startDate="ngModel"
+                                [(ngModel)]="defaultDate"
+                                (dateInput)="getDate($event.value)"
+                                [value]="program.startDate"
+                                required
+                            />
+                            <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle> 
+                            <mat-datepicker #date color="primary"></mat-datepicker>
+                            <mat-error *ngIf="!isValid(startDate)">{{ getError(startDate) }}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <h4 class="subtitle">Details</h4>
+                    <div class="row m-0">
+                        <div class="col-lg-6 p-0 div-image">
+                            <mat-label>Program Cover Image (Optional)</mat-label>
+                            <span class="icon-trash">
+                                <i class='bx bx-trash' *ngIf="pictureLoaded" (click)="removeFile('image')"></i>
+                            </span>
+                            <mat-card [class]="pictureLoaded ? 'w-100 p-0 card-file' : 'w-100 card-file' ">
+                                <div class="flex-img" *ngIf="pictureLoaded">
+                                    <img class="img" [src]="pictureCover" alt="image cover">
+                                </div>
+                                <mat-card-content class="text-center" *ngIf="!pictureLoaded">
+                                    <input type="file" accept="image/png, image/jpeg" class="input-file" #image (change)="detectFile(image)" name="imageFile">
+                                    <div id="icon-uplaod">
+                                        <i class='bx bx-cloud-upload'></i>
+                                    </div>
+                                    <p> Format: jpg, png, ico <br> Max size: 100 KB</p>
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                        <div class="col-lg-6 p-0 div-video">
+                            <mat-label class="ms-3">Video Thumbnail (Optional)</mat-label>
+                            <span class="icon-trash">
+                                <i class='bx bx-trash' *ngIf="videoLoaded" (click)="removeFile('video')"></i>
+                            </span>
+                            <mat-card [class]="videoLoaded ? 'w-100 p-0 card-file ' : 'w-100 card-file ms-3' ">
+                                <div class="flex-img" *ngIf="videoLoaded">
+                                    <video class="img"  width="320" height="100" autoplay controls>
+                                        <source [src]="videoCover" type="video/mp4" name="videoFile">
+                                    </video>
+                                    <!-- <video width="320" height="100" autoplay controls>
+                                        <source [src]="fileCover" type="video/mp4">
+                                    </video> -->
+                                </div>
+                                <mat-card-content class="text-center" *ngIf="!videoLoaded">
+                                        <input type="file" accept="video/mp4, video/mov" class="input-file" #video (change)="detectFile(video)">
+                                    <div id="icon-uplaod">
+                                    <i class='bx bx-cloud-upload'></i>
+                                    </div>
+                                <p> Format: mp4, mov<br>Max size: 500 MB</p>
+                            </mat-card-content>
+                            </mat-card>
+                        </div>
+                        <div class="my-4 p-0">
+                            <button mat-button [class]=" form.valid ?' btn-save-valid' : 'btn-save-invalid' " (click)="save(form)">Create Program</button>
+                        </div>
+                </div>
+                </form>
+        </div>
+    </div>
+</div>
+</section>
+
