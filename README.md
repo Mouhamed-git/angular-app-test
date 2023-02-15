@@ -1,1 +1,1 @@
-# edacy-app-test
+# angular-app-test
